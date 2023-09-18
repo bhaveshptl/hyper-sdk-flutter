@@ -32,10 +32,12 @@ class HyperSdkFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        this.binding = binding
-        val fragmentActivity = binding.activity as FragmentActivity
-        hyperServices = HyperServices(fragmentActivity)
-        binding.addActivityResultListener(this)
+        Thread{
+            this.binding = binding
+            val fragmentActivity = binding.activity as FragmentActivity
+            hyperServices = HyperServices(fragmentActivity)
+            binding.addActivityResultListener(this)
+        }.start()
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
